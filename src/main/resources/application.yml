@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+  
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: chargie
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  
+server:
+  port: 8765
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+#jwtSecurity
+chargie:
+  security:
+    password:
+      encoder:
+        secret: mysecret
+        iteration : 33
+        keylength : 256
+    jjwt:
+      secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+      expiration: 28800
