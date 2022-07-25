@@ -15,10 +15,8 @@ import reactor.core.publisher.Mono;
 
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @Component
-public class SecurityContextRepository implements ServerSecurityContextRepository{
+public class SecurityContextRepository implements ServerSecurityContextRepository {
 
-
-	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -33,7 +31,6 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 		HttpHeaders headers = request.getHeaders();
 		String authHeader = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
-		
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
 			String authToken = authHeader.substring(7);
 			Authentication auth = new UsernamePasswordAuthenticationToken(authToken, authToken);
@@ -44,6 +41,5 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 			return Mono.empty();
 		}
 	}
-	
 
 }

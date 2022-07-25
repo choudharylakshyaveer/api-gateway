@@ -53,7 +53,7 @@ public class WebSecurityConfig {
 				//.pathMatchers(HttpMethod.POST, "/**").permitAll()
 				//.pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.pathMatchers("/login").permitAll()
-				//.pathMatchers("/user/save").permitAll() //line added
+				.pathMatchers("/user/save").permitAll() //line added
 				//.pathMatchers("/students").permitAll()
 				//.pathMatchers("/REGISTRATION-SERVICE/**").permitAll()
 				//.pathMatchers("/REGISTRATION-SERVICE/test").permitAll()
