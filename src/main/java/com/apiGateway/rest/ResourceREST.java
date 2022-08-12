@@ -64,4 +64,14 @@ public class ResourceREST {
 		
 		
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public Mono<ResponseEntity<?>>  testPostApi(@RequestBody User user){
+		Mono<String> test = Mono.just("Test Data from Post API");
+		System.out.println(user.getUsername());
+		return Mono.just(ResponseEntity.ok().body(test));
+	}
+	
+	
 }

@@ -13,6 +13,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
@@ -42,7 +44,14 @@ public class WebSecurityConfig {
 						swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
 					});
 				}).and()
-				.cors().and()
+				.cors().configurationSource(request -> {
+					CorsConfiguration config = new CorsConfiguration();
+					config.setAllowedOrigins(Collections.singletonList("*"));
+					config.setAllowedMethods(Arrays.asList("GET","POST","PUT","PATCH", "DELETE","OPTIONS"));
+					config.setAllowedHeaders(Collections.singletonList("*"));
+					return config;
+				})
+				.and()
 				.csrf().disable() //csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()).and()
 				.formLogin().disable()
 				.httpBasic().disable()
@@ -57,6 +66,7 @@ public class WebSecurityConfig {
 				//.pathMatchers("/students").permitAll()
 				//.pathMatchers("/REGISTRATION-SERVICE/**").permitAll()
 				//.pathMatchers("/REGISTRATION-SERVICE/test").permitAll()
+				//.pathMatchers("/test").permitAll()
 				.anyExchange()
 				//.permitAll()
 				.authenticated()
